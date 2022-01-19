@@ -3,9 +3,9 @@ Experiment using json in C
 
 
 
-# Installing nlohmann-json-dev
+# Installing json-c
 ```
-sudo apt-get install -y nlohmann-json3-dev
+sudo apt install libjson-c-dev
 ```
 
 # Build and run

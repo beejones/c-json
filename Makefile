@@ -1,12 +1,14 @@
 CC=g++
-CFLAGS = -Wall -Wextra
-CFLAGS += $(shell pkg-config --cflags json-c)
-LDFLAGS += $(shell pkg-config --libs json-c)
-CFLAGS += $(shell pkg-config --cflags nlohmann_json)
-//LDFLAGS += $(shell pkg-config --libs nlohmann_json)
+CFLAGS = -Wall -Wextra  -Ijson-c/build -static -Ljson-c/build
+#LDFLAGS = $(shell pkg-config --libs json-c)
+#LIBJSON = json-c/build
+#LIBJSON_OBJS =	$(LIBJSON)/json_util.o $(LIBJSON)/json_object.o $(LIBJSON)/json_tokener.o \
+#				$(LIBJSON)/json_object_iterator.o $(LIBJSON)/printbuf.o $(LIBJSON)/linkhash.o \
+#				$(LIBJSON)/arraylist.o $(LIBJSON)/random_seed.o $(LIBJSON)/debug.o $(LIBJSON)/strerror_override.o
+#PG_CPPFLAGS = --std=c99 -I$(LIBJSON)
 
 DEPS = DataStore.h
-OBJS = main.o DataStore.o
+OBJS = main.o DataStore.o $(LIBJSON_OBJS)
 
 # The build target 
 TARGET = main
@@ -15,8 +17,5 @@ TARGET = main
 %.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -c -o $@ $< 
 
-%.o: %.cpp $(DEPS)
-	$(CC) $(CFLAGS) -c -o $@ $< 
-
-$(TARGET): main.o $(DEPS)
-	$(CC) $(CFLAGS) main.c DataStore.cpp  -o main
+$(TARGET): $(OBJS) $(DEPS)
+	$(CC) $(CFLAGS) main.c DataStore.c  -o main -ljson-c
