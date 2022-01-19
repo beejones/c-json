@@ -1,6 +1,7 @@
 #ifndef DATASTORE_H
 #define DATASTORE_H
 
+#include <cstdio>
 #include "json-c/json.h"
 
 extern void print();

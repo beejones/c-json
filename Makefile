@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS = -Wall -Wextra  -Ijson-c/build -static -Ljson-c/build
+CFLAGS = -g -Wall -Wextra  -Ijson-c/build -static -Ljson-c/build
 #LDFLAGS = $(shell pkg-config --libs json-c)
 #LIBJSON = json-c/build
 #LIBJSON_OBJS =	$(LIBJSON)/json_util.o $(LIBJSON)/json_object.o $(LIBJSON)/json_tokener.o \
