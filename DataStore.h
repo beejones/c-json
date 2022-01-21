@@ -1,12 +1,13 @@
 #ifndef DATASTORE_H
 #define DATASTORE_H
 
-#include <cstdio>
+#include "stdio.h"
 #include "json-c/json.h"
 
-extern void print();
-extern void insert(char *, char *);
-extern void del(char *key);
-extern void update(char *key, char *value);
+extern void mapInit();
+extern void mapPrint();
+extern void mapInsert(const char *key, const char *value);
+extern void mapDeleteItem(const char *key);
+extern void mapUpdate(const char *key, const char *value);
 
 #endif

@@ -8,37 +8,67 @@ char initFilms[] = " {\
     }\
 ";
 
-// Print films map
-void print()
+static struct json_object *films = NULL;
+
+void mapInit()
 {
-    struct json_object *parsed_json = json_tokener_parse(initFilms);
-    if (parsed_json == NULL) {
-        printf("%s -> invalid json\n", initFilms);
+    films = json_tokener_parse(initFilms);
+}
+
+
+// Print films map
+void mapPrint()
+{
+    if (films == NULL) 
+    {
+        printf("Run mapInit() first\n");
         return;
     }
+
     struct json_object_iterator it = json_object_iter_init_default();
-    it = json_object_iter_begin(parsed_json);
-    struct json_object_iterator itEnd = json_object_iter_end(parsed_json);
+    it = json_object_iter_begin(films);
+    struct json_object_iterator itEnd = json_object_iter_end(films);
+
+    printf("------------------------------------\n");
 
     while (!json_object_iter_equal(&it, &itEnd))
     {
-        printf("%s\n", json_object_iter_peek_name(&it));
+        printf("%s: ", json_object_iter_peek_name(&it));
         printf("%s\n", json_object_to_json_string(json_object_iter_peek_value(&it)));
         json_object_iter_next(&it);
     }
 }
 
-void insert(char *key, char *value)
+// Insert element into map
+void mapInsert(const char *key, const char *value)
 {
-    //films.insert(make_pair(key, value));
+   if (films == NULL) 
+    {
+        printf("Run mapInit() first\n");
+        return;
+    }
+
+    auto obj = json_tokener_parse(value);
+    if (obj == NULL) 
+    {
+        printf("%s is no valid json\n", value);
+        return;
+    }
+    json_object_object_add(films, key, obj);
 }
 
-void del(char *key)
+void mapDeleteItem(const char *key)
 {
-    //films.erase(key);
+   if (films == NULL) 
+    {
+        printf("Run mapInit() first\n");
+        return;
+    }
+    json_object_object_del(films, key);
 }
 
-void update(char *key, char *value)
+void mapUpdate(const char *key, const char *value)
 {
-    //films[key] = value;
+  mapInsert(key, value);
 }
+   
