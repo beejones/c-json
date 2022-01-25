@@ -4,7 +4,7 @@
 #include "stdio.h"
 #include "json-c/json.h"
 
-extern void mapInit();
+extern int mapInit();
 extern void mapPrint();
 extern void mapInsert(const char *key, const char *value);
 extern void mapDeleteItem(const char *key);

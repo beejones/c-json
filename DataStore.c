@@ -10,9 +10,10 @@ char initFilms[] = " {\
 
 static struct json_object *films = NULL;
 
-void mapInit()
+int mapInit()
 {
     films = json_tokener_parse(initFilms);
+    return 1;
 }
 
 
@@ -71,4 +72,3 @@ void mapUpdate(const char *key, const char *value)
 {
   mapInsert(key, value);
 }
-   

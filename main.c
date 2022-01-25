@@ -10,4 +10,7 @@ int main() {
     mapPrint();
     mapUpdate("4", "{\"title\": \"Back to the future\"}");
     mapPrint();
+    mapInsert("5", "\"test string\"");
+    mapPrint();
+    
 }
